@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="https://user-images.githubusercontent.com/102135008/233182699-3da4126e-cf85-4aa5-8d62-f1664abda33f.png">
+<img src="https://user-images.githubusercontent.com/102135008/234664100-bcf2f216-be43-4bbd-b084-50d46a1f998e.png">
 
 
-# *Notes App*
-Notes app made with Flutter in India.
+# *Photo Gallery App*
+Photo Gallery app made with Flutter in India.
 
 ---
 
@@ -12,17 +12,16 @@ Notes app made with Flutter in India.
 
 ## 🗒 About
 
-These are Notes App in which you can save your needs by writing notes.
+These are Photo Gallery App in this app You Can browse Photos. 
 
 ## ⚙ Features
 
 - Main features are as follows:
 
-    - Login And SignUp
-    - Login with google
-    - Add notes functionality
-    - Update & Delete notes
-    
+    - Browse Photos
+    - Search Photos
+    - Light and Dark Theme
+   
 ## 📲 Screenshots
 
 
@@ -43,8 +42,9 @@ These are Notes App in which you can save your needs by writing notes.
 
 ## 📲 Preview
 
+https://user-images.githubusercontent.com/102135008/234667422-840c0884-8d33-4f82-9733-bf11177f6e65.mp4
 
-https://user-images.githubusercontent.com/102135008/233185403-b752d4c0-746f-4e08-b879-a265b0e1e057.mp4
+
 
 ## 📝 License
 
@@ -55,7 +55,7 @@ This project is [MIT](License.md) licensed.
 <div align="center">
 
 
-<img src="https://user-images.githubusercontent.com/102135008/233184593-7f6917ab-49ab-4e05-8620-fcc093efb349.png" width="200px" height="200px">
+<img src="https://user-images.githubusercontent.com/102135008/234667927-addbf44d-f20a-4124-af68-8864ed0ca6b0.png" width="200px" height="200px">
   
 ---
 ### You can show some respect by starring 🌟 the repository!
