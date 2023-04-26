@@ -13,3 +13,10 @@ class Gallery {
         likes: data['likes']);
   }
 }
+
+
+class Thame {
+  bool isDark;
+
+  Thame({required this.isDark});
+}

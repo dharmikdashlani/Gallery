@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gallery/helper/api_helper.dart';
+import 'package:provider/provider.dart';
 
+import '../../Provider/theme_changer_provider.dart';
 import '../../modal/modal.dart';
 
 class Search extends StatefulWidget {
@@ -37,11 +39,35 @@ class _SearchState extends State<Search> {
                   flex: 8,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 5, top: 5, bottom: 2, right: 5),
+                        left: 15, top: 5, bottom: 2, right: 5),
                     child: TextFormField(
+                      cursorColor:
+                          (Provider.of<ThemeControler>(context, listen: true)
+                                  .t
+                                  .isDark)
+                              ? Colors.deepPurpleAccent
+                              : Colors.amber,
+                      keyboardType: TextInputType.text,
                       controller: searchController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                                color: (Provider.of<ThemeControler>(context,
+                                            listen: true)
+                                        .t
+                                        .isDark)
+                                    ? Colors.deepPurpleAccent
+                                    : Colors.amber,
+                                width: 3)),
                         border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: (Provider.of<ThemeControler>(context,
+                                          listen: true)
+                                      .t
+                                      .isDark)
+                                  ? Colors.deepPurpleAccent
+                                  : Colors.amberAccent,
+                              width: 12.0),
                           borderRadius: BorderRadius.all(
                             Radius.circular(20),
                           ),
@@ -51,11 +77,11 @@ class _SearchState extends State<Search> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      EdgeInsets.only(left: 5, top: 5, bottom: 2, right: 5),
+                  padding: const EdgeInsets.only(
+                      left: 1, top: 5, bottom: 2, right: 10),
                   child: Expanded(
                     flex: 1,
-                    child: InkWell(
+                    child: GestureDetector(
                       onTap: () {
                         setState(() {
                           getData = APIHelper.apiHelper
@@ -64,7 +90,7 @@ class _SearchState extends State<Search> {
                       },
                       child: Icon(
                         Icons.search,
-                        size: 30,
+                        size: 40,
                       ),
                     ),
                   ),
@@ -83,26 +109,35 @@ class _SearchState extends State<Search> {
                     return Text("Error:${snapshot.error}");
                   } else if (snapshot.hasData) {
                     List<Gallery> data = snapshot.data;
-                    return Container(
-                      child: GridView.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 1,
-                            mainAxisSpacing: 5),
-                        itemCount: data.length,
-                        itemBuilder: (context, i) {
-                          return Card(
-                            elevation: 3,
-                            child: Container(
-                              child: Image.network(data[i].urls,
-                                  fit: BoxFit.fill, height: height * 0.14),
-                            ),
-                          );
-                        },
-                      ),
+                    return GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 2,
+                              childAspectRatio: 1,
+                              mainAxisSpacing: 5),
+                      itemCount: data.length,
+                      itemBuilder: (context, i) {
+                        return Card(
+                          elevation: 3,
+                          // ignore: avoid_unnecessary_containers
+                          child: Container(
+                            child: Image.network(data[i].urls,
+                                fit: BoxFit.fill, height: height * 0.14),
+                          ),
+                        );
+                      },
                     );
                   }
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor:
+                          (Provider.of<ThemeControler>(context, listen: true)
+                                  .t
+                                  .isDark)
+                              ? Colors.deepPurpleAccent
+                              : Colors.amberAccent,
+                    ),
+                  );
                 },
               ),
             ),

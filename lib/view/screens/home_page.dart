@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gallery/view/screens/search.dart';
 import 'package:motion_tab_bar_v2/motion-tab-bar.dart';
-import 'package:motion_tab_bar_v2/motion-badge.widget.dart';
-
+import 'package:provider/provider.dart';
+import '../../Provider/theme_changer_provider.dart';
 import 'Setting.dart';
 import 'home.dart';
 
@@ -29,6 +29,7 @@ class MyHomePage extends StatefulWidget {
   final String? title;
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
@@ -56,28 +57,46 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Gallery"),
-        elevation: 3,
-        backgroundColor: Colors.blueAccent,
+        title: const Text(
+          "Photo Gallery",
+          style: TextStyle(
+              // color: Colors.black,
+              ),
+        ),
+        // backgroundColor: Colors.amberAccent,
       ),
       bottomNavigationBar: MotionTabBar(
         initialSelectedTab: "Home",
-        useSafeArea: true, // default: true, apply safe area wrapper
+        useSafeArea: true,
+        // default: true, apply safe area wrapper
         labels: const ["Home", "Search", "Settings"],
         icons: const [Icons.home, Icons.search, Icons.settings],
         tabSize: 50,
         tabBarHeight: 55,
-        textStyle: const TextStyle(
+        textStyle: TextStyle(
           fontSize: 12,
-          color: Colors.black,
+          color: (Provider.of<ThemeControler>(context, listen: true).t.isDark)
+              ? Colors.deepPurple
+              : Colors.amberAccent,
           fontWeight: FontWeight.w500,
         ),
-        tabIconColor: Colors.blue[600],
+        tabIconColor:
+            (Provider.of<ThemeControler>(context, listen: true).t.isDark)
+                ? Colors.deepPurpleAccent
+                : Colors.amberAccent,
         tabIconSize: 28.0,
         tabIconSelectedSize: 26.0,
-        tabSelectedColor: Colors.blueAccent,
+        tabSelectedColor:
+            (Provider.of<ThemeControler>(context, listen: true).t.isDark)
+                ? Colors.deepPurpleAccent
+                : Colors.amberAccent,
         tabIconSelectedColor: Colors.white,
-        tabBarColor: Colors.white,
+        // tabBarColor: (Provider.of<ThemeControler>(context,
+        //     listen: true)
+        //     .t
+        //     .isDark)
+        //     ? Colors.deepPurple
+        //     : Colors.lime,
         onTabItemSelected: (int value) {
           setState(() {
             _tabController!.index = value;
@@ -85,7 +104,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         },
       ),
       body: TabBarView(
-        physics: NeverScrollableScrollPhysics(), // swipe navigation handling is not supported
+        physics: const NeverScrollableScrollPhysics(),
+        // swipe navigation handling is not supported
         controller: _tabController,
         // ignore: prefer_const_literals_to_create_immutables
         children: <Widget>[
@@ -93,13 +113,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             child: Home(),
           ),
           const Center(
-            child:  Search(),
+            child: Search(),
           ),
           const Center(
-            child: Setting(),
+            child: ThemeChange(),
           ),
         ],
       ),
+      // backgroundColor: Colors.white24,
     );
   }
 }

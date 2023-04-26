@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gallery/helper/api_helper.dart';
 import 'package:gallery/modal/modal.dart';
+import 'package:provider/provider.dart';
+
+import '../../Provider/theme_changer_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -51,7 +54,14 @@ class _HomeState extends State<Home> {
               ),
             );
           }
-          return const Center(child: CircularProgressIndicator());
+          return Center(
+            child: CircularProgressIndicator(
+              backgroundColor:
+                  (Provider.of<ThemeControler>(context, listen: true).t.isDark)
+                      ? Colors.deepPurpleAccent
+                      : Colors.amberAccent,
+            ),
+          );
         },
       ),
     );

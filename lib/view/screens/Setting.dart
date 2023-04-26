@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Setting extends StatefulWidget {
-  const Setting({Key? key}) : super(key: key);
+import '../../Provider/theme_changer_provider.dart';
+
+class ThemeChange extends StatefulWidget {
+  const ThemeChange({Key? key}) : super(key: key);
 
   @override
-  State<Setting> createState() => _SettingState();
+  State<ThemeChange> createState() => _ThemeChangeState();
 }
 
-class _SettingState extends State<Setting> {
+class _ThemeChangeState extends State<ThemeChange> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,12 +23,20 @@ class _SettingState extends State<Setting> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
+                    height: 40,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all()),
-                    child: const Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Text("Change the Theme"),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                          color: (Provider.of<ThemeControler>(context,
+                                      listen: true)
+                                  .t
+                                  .isDark)
+                              ? Colors.white
+                              : Colors.black,
+                        )),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: const Text("Change Theme Mode"),
                     ),
                   ),
                 ),
@@ -35,8 +46,23 @@ class _SettingState extends State<Setting> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Switch(
-                    onChanged: (val) {},
-                    value: true,
+                    inactiveTrackColor: (Provider.of<ThemeControler>(context,
+                        listen: true)
+                        .t
+                        .isDark)
+                        ? Colors.deepPurpleAccent
+                        : Colors.amberAccent,
+                    activeColor: (Provider.of<ThemeControler>(context,
+                        listen: true)
+                        .t
+                        .isDark)
+                        ? Colors.deepPurpleAccent
+                        : Colors.amberAccent,
+                    value: Provider.of<ThemeControler>(context).t.isDark,
+                    onChanged: (Val) {
+                      Provider.of<ThemeControler>(context, listen: false)
+                          .setDark();
+                    },
                   ),
                 ),
               ),
